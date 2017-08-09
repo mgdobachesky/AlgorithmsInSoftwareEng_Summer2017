@@ -25,7 +25,6 @@ public class Driver {
 		
 		System.out.println();
 		System.out.println("Removing Duplicates: ");
-		ll.addToTail(9);
 		ll.removeDuplicates();
 		ll.printAll();
 		
