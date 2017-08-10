@@ -2,24 +2,25 @@ package Lab_Week4;
 
 import java.util.Arrays;
 
-public class ArrayStack {
+public class ArrayQueue {
 	private int[] data;
 	private int head;
 	private int tail;
 	
-	public ArrayStack(int size) {
+	public ArrayQueue(int size) {
 		data = new int[size];
 		clear();
-		head = 0;
+		head = -1;
 		tail = -1;
 	}
 	
 	public void clear() {
 		Arrays.fill(data, -1);
+		head = -1;
 		tail = -1;
 	}
 	
-	public void push(int element) {
+	public void enqueue(int element) {
 		// incase the array is not big enough to push another element
 		if(tail >= data.length) {
 			int temp[] = new int[data.length * 2];
@@ -29,24 +30,29 @@ public class ArrayStack {
 			data = temp;
 		}
 		// push the element
-		int dataSize = this.size();
+		int dataSize = 0;
+		if(tail != -1 && head != -1)
+			dataSize = this.size();
 		data[dataSize] = element;
 		tail++;
+		// handle the situation where first head is enqueued
+		if(head == -1) {
+			head = 0;
+		}
 	}
 	
-	public int pop() {
+	public int dequeue() {
 		int result = -1;
-		if(tail > -1) {
+		if(tail >= -1) {
 			int dataSize = this.size();
-			result = data[dataSize-1];
-			data[dataSize-1] = -1;
-			tail--;
+			result = data[head++];
+			data[head] = -1;
 		}
 		return result;
 	}
 	
 	public int size() {
-		return tail + 1;
+		return (tail - head) + 1;
 	}
 	
 	public boolean find(int element) {
