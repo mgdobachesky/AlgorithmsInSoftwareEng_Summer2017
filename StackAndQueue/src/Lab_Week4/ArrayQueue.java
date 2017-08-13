@@ -10,49 +10,36 @@ public class ArrayQueue {
 	public ArrayQueue(int size) {
 		data = new int[size];
 		clear();
-		head = -1;
-		tail = -1;
 	}
 	
 	public void clear() {
 		Arrays.fill(data, -1);
-		head = -1;
-		tail = -1;
+		head = 0;
+		tail = 0;
 	}
 	
 	public void enqueue(int element) {
-		// incase the array is not big enough to push another element
-		if(tail >= data.length) {
-			int temp[] = new int[data.length * 2];
-			for(int i = 0; i < data.length; i++) {
-				temp[i] = data[i];
-			}
-			data = temp;
-		}
-		// push the element
-		int dataSize = 0;
-		if(tail != -1 && head != -1)
-			dataSize = this.size();
+		checkArrayRoom();
+		int dataSize = this.size();
 		data[dataSize] = element;
 		tail++;
-		// handle the situation where first head is enqueued
-		if(head == -1) {
-			head = 0;
-		}
 	}
 	
 	public int dequeue() {
 		int result = -1;
-		if(tail >= -1) {
-			int dataSize = this.size();
-			result = data[head++];
+		if(tail != head) {
+			result = data[head];
 			data[head] = -1;
+			head = head + 1;
 		}
 		return result;
 	}
 	
 	public int size() {
-		return (tail - head) + 1;
+		if(head == tail)
+			return 0;
+		else 
+			return (tail - head);
 	}
 	
 	public boolean find(int element) {
@@ -71,5 +58,16 @@ public class ArrayQueue {
 			}
 		}
 		return -1;
+	}
+	
+	public void checkArrayRoom() {
+		// in case the array is not big enough to push another element
+		if(tail >= data.length) {
+			int temp[] = new int[data.length * 2];
+			for(int i = 0; i < data.length; i++) {
+				temp[i] = data[i];
+			}
+			data = temp;
+		}
 	}
 }

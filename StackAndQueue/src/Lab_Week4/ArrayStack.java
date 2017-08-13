@@ -4,31 +4,22 @@ import java.util.Arrays;
 
 public class ArrayStack {
 	private int[] data;
-	private int head;
 	private int tail;
+	private int head;
 	
 	public ArrayStack(int size) {
 		data = new int[size];
 		clear();
-		head = 0;
-		tail = -1;
 	}
 	
 	public void clear() {
 		Arrays.fill(data, -1);
-		tail = -1;
+		head = 0;
+		tail = 0;
 	}
 	
 	public void push(int element) {
-		// incase the array is not big enough to push another element
-		if(tail >= data.length) {
-			int temp[] = new int[data.length * 2];
-			for(int i = 0; i < data.length; i++) {
-				temp[i] = data[i];
-			}
-			data = temp;
-		}
-		// push the element
+		checkArrayRoom();
 		int dataSize = this.size();
 		data[dataSize] = element;
 		tail++;
@@ -36,17 +27,17 @@ public class ArrayStack {
 	
 	public int pop() {
 		int result = -1;
-		if(tail > -1) {
-			int dataSize = this.size();
-			result = data[dataSize-1];
-			data[dataSize-1] = -1;
+		if(tail != head) {
+			int dataSize = this.size() - 1;
+			result = data[dataSize];
+			data[dataSize] = -1;
 			tail--;
 		}
 		return result;
 	}
 	
 	public int size() {
-		return tail + 1;
+		return tail;
 	}
 	
 	public boolean find(int element) {
@@ -65,5 +56,16 @@ public class ArrayStack {
 			}
 		}
 		return -1;
+	}
+	
+	public void checkArrayRoom() {
+		// in case the array is not big enough to push another element
+		if(tail >= data.length) {
+			int temp[] = new int[data.length * 2];
+			for(int i = 0; i < data.length; i++) {
+				temp[i] = data[i];
+			}
+			data = temp;
+		}
 	}
 }

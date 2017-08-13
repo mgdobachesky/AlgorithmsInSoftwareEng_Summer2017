@@ -24,6 +24,8 @@ public class Driver {
         
         System.out.println("Size: " + as.size()); // this should print 4
         
+        System.out.println("Pop: " + as.pop()); // this should print 0
+        
         
         System.out.println();
         
@@ -47,6 +49,8 @@ public class Driver {
         System.out.println("Dequeue: " + aq.dequeue()); // this should print 10
         
         System.out.println("Size: " + aq.size()); // this should print 4
+        
+        System.out.println("Dequeue: " + aq.dequeue()); // this should print 11
 	}
 
 }
