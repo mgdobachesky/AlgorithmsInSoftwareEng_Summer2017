@@ -129,7 +129,7 @@ public class IntSLList {
 				head = tail = null;
 				return;
 			}
-			bubbleSort();
+			//bubbleSort();
 			int listSize = 0;
 			int halfSize = 0;
 			for(IntSLLNode tmp = head; tmp != null; tmp = tmp.next, listSize++);
