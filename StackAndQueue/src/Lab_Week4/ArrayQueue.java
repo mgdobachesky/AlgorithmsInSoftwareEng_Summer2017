@@ -32,7 +32,20 @@ public class ArrayQueue {
 			data[head] = -1;
 			head = head + 1;
 		}
+		resize();
 		return result;
+	}
+	
+	public void resize() {
+		int temp[] = new int[data.length];
+		for(int i = 0, j = head; i < data.length; i++, j++) {
+			if(j != data.length) {
+				temp[i] = data[j];
+			} else {
+				temp[i] = -1;
+			}
+		}
+		data = temp;
 	}
 	
 	public int size() {
