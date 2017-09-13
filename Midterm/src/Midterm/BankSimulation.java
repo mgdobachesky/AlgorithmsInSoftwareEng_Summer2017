@@ -1,3 +1,4 @@
+package Midterm;
 import java.util.Random;
 import sun.misc.Queue;
 
